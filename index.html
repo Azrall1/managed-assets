@@ -3,228 +3,634 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Managed Assets | IT Asset Management Toolkits and Guides</title>
-  <meta name="description" content="Managed Assets provides practical IT Asset Management toolkits, vendor governance guides, audit resources, and operational templates." />
+  <meta name="description" content="Managed Assets provides practical Software Asset Management, licence optimisation, audit readiness, contract renewal and vendor management support for businesses." />
+  <title>Managed Assets | Software Asset Management & Licence Optimisation</title>
 
   <style>
     :root {
-      --navy: #062554;
-      --teal: #007C80;
-      --light: #F7F9FC;
-      --white: #FFFFFF;
-      --grey: #5F6B7A;
-      --border: #DCE7EA;
+      --bg: #f5f7f9;
+      --surface: #ffffff;
+      --surface-soft: #eef3f5;
+      --text: #1f2933;
+      --muted: #5f6f7a;
+      --accent: #1f7a6d;
+      --accent-dark: #155e55;
+      --accent-soft: #dcefed;
+      --border: #d7e0e5;
+      --shadow: 0 18px 45px rgba(20, 35, 48, 0.12);
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--light);
-      color: var(--navy);
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
     }
 
-    header {
-      background: var(--white);
-      padding: 2rem 1.5rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      text-align: center;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .header-image {
-      width: min(100%, 1100px);
-      height: auto;
+    img {
+      max-width: 100%;
       display: block;
+    }
+
+    .container {
+      width: min(1120px, 92%);
       margin: 0 auto;
     }
 
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.25rem;
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(31, 122, 109, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: #fff;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .hero {
-      text-align: center;
-      margin-bottom: 3rem;
+      padding: 82px 0 64px;
+      background: radial-gradient(circle at top right, var(--accent-soft), transparent 38%), linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
     }
 
-    .hero-logo {
-      width: 250px;
-      height: auto;
-      margin-bottom: 1rem;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      margin: 0 0 1rem;
-      letter-spacing: -0.03em;
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.06em;
+      margin-bottom: 22px;
     }
 
-    .tagline {
-      color: var(--teal);
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
+    .hero p {
+      font-size: 1.18rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 28px;
     }
 
-    .intro {
-      max-width: 760px;
-      margin: 0 auto 2rem;
-      color: var(--grey);
-      font-size: 1.05rem;
-    }
-
-    .buttons {
+    .hero-actions {
       display: flex;
-      justify-content: center;
-      gap: 1rem;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-top: 2rem;
     }
 
-    .button {
-      display: inline-block;
-      padding: 0.9rem 1.4rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(6, 37, 84, 0.15);
-    }
-
-    .primary {
-      background: var(--teal);
-      color: var(--white);
-    }
-
-    .secondary {
-      background: var(--white);
-      color: var(--navy);
+    .hero-card {
+      background: var(--surface);
       border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .hero-card img {
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-card h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    section {
+      padding: 74px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.08rem;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      margin-top: 3rem;
+      gap: 22px;
     }
 
     .card {
-      background: var(--white);
-      padding: 1.5rem;
-      border-radius: 18px;
+      background: var(--surface);
       border: 1px solid var(--border);
-      box-shadow: 0 10px 24px rgba(6, 37, 84, 0.06);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 28px rgba(20, 35, 48, 0.06);
     }
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: var(--navy);
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
     }
 
     .card p {
-      color: var(--grey);
-      margin-bottom: 0;
+      color: var(--muted);
     }
 
-    .section {
-      margin-top: 4rem;
-      background: var(--white);
-      padding: 2rem;
-      border-radius: 22px;
-      border-left: 6px solid var(--teal);
-      box-shadow: 0 10px 24px rgba(6, 37, 84, 0.06);
+    .about {
+      background: #ffffff;
     }
 
-    .section h2 {
-      margin-top: 0;
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: center;
+      gap: 46px;
+    }
+
+    .profile-wrap {
+      background: linear-gradient(145deg, var(--accent-soft), #fff);
+      border-radius: 32px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-photo {
+      border-radius: 24px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .about-copy h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 1.04rem;
+    }
+
+    .about-copy strong {
+      color: var(--text);
+    }
+
+    .expertise-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+      list-style: none;
+    }
+
+    .expertise-list li {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .credentials {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .credential {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .credential strong {
+      display: block;
+      color: var(--accent-dark);
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .credential span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .feature-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-panel ul {
+      margin-top: 18px;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .feature-panel li {
+      margin-bottom: 9px;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #123d39, #1f7a6d);
+      color: #fff;
+      border-radius: 34px;
+      padding: 44px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.82);
+      max-width: 720px;
+    }
+
+    .cta .btn {
+      background: #fff;
+      color: var(--accent-dark);
     }
 
     footer {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      color: var(--grey);
-      font-size: 0.95rem;
+      padding: 34px 0;
+      color: var(--muted);
       border-top: 1px solid var(--border);
-      background: var(--white);
     }
 
-    @media (max-width: 800px) {
-      .cards {
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-grid,
+      .split,
+      .cta {
         grid-template-columns: 1fr;
       }
 
-      header {
-        padding-top: 1rem;
+      .cards,
+      .credentials {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      main {
-        padding-top: 2rem;
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .cards,
+      .credentials,
+      .expertise-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .cta {
+        padding: 30px;
       }
     }
   </style>
 </head>
-
 <body>
-  
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Managed Assets home">
+        <img src="logo.png" alt="Managed Assets logo" />
+        <span>Managed Assets</span>
+      </a>
 
-  <main>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#toolkits">Toolkits</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
     <section class="hero">
-      <img src="managed-assets-logo.png" alt="Managed Assets Logo" class="hero-logo" />
-      <h1>IT Asset Management Toolkits and Guides</h1>
-      <p class="tagline">Smart tracking. Better control.</p>
-      <p class="intro">
-        Managed Assets provides practical, experience-led resources for IT Asset Management,
-        Software Asset Management, vendor governance, contract review, audit readiness,
-        and operational control.
-      </p>
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">SAM • HAM • Vendor Management</span>
+          <h1>Take control of your software, contracts and supplier costs.</h1>
+          <p>
+            Managed Assets helps businesses reduce licence risk, prepare for audits, optimise renewals and make smarter decisions across their IT asset and vendor estate.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.etsy.com/shop/ManagedAssets" target="_blank" rel="noopener">View Toolkits</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/allan-bott-a5220b26/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+          </div>
+        </div>
 
-      <div class="buttons">
-        <a class="button primary" href="https://www.etsy.com/shop/ManagedAssets" target="_blank" rel="noopener noreferrer">Visit Etsy Shop</a>
-        <a class="button secondary" href="https://www.linkedin.com/in/allan-bott-a5220b26/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+        <aside class="hero-card" aria-label="Managed Assets overview">
+          <img src="logo.png" alt="Managed Assets logo" />
+          <h2>Practical asset management support</h2>
+          <p>
+            Clear templates, guides and advisory support for software licensing, audit readiness, contract renewals and vendor governance.
+          </p>
+        </aside>
       </div>
     </section>
 
-    <section class="cards">
-      <div class="card">
-        <h2>ITAM Toolkits</h2>
-        <p>Structured resources for asset governance, lifecycle control, and operational visibility.</p>
-      </div>
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Support where IT, licensing and commercial risk overlap.</h2>
+          <p>From licence visibility to contract renewals, Managed Assets focuses on practical improvements that reduce cost, complexity and compliance exposure.</p>
+        </div>
 
-      <div class="card">
-        <h2>Vendor Governance</h2>
-        <p>Guides and review packs for supplier onboarding, contract renewals, and due diligence.</p>
-      </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Software Audit Readiness</h3>
+            <p>Prepare for vendor audits with clearer entitlement records, deployment evidence, risk logs and remediation actions.</p>
+          </article>
 
-      <div class="card">
-        <h2>Audit Readiness</h2>
-        <p>Practical checklists and guidance to support internal reviews and compliance preparation.</p>
+          <article class="card">
+            <h3>Effective Licence Position</h3>
+            <p>Understand entitlement versus deployment, identify reconciliation gaps and build a defensible licence position.</p>
+          </article>
+
+          <article class="card">
+            <h3>Renewal & Negotiation Support</h3>
+            <p>Improve supplier conversations with usage data, commercial challenge, renewal planning and negotiation structure.</p>
+          </article>
+
+          <article class="card">
+            <h3>SAM & HAM Process Improvement</h3>
+            <p>Design lifecycle processes for acquisition, deployment, usage, retirement, ownership and governance.</p>
+          </article>
+
+          <article class="card">
+            <h3>Vendor Management</h3>
+            <p>Strengthen supplier reviews, SLA tracking, KPI governance and contract ownership models.</p>
+          </article>
+
+          <article class="card">
+            <h3>Cost Optimisation</h3>
+            <p>Reduce unnecessary spend through licence harvesting, reallocation, rationalisation and better renewal control.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Built from real-world IT experience</h2>
-      <p>
-        Managed Assets is designed for IT professionals, asset managers, vendor managers,
-        procurement teams, and small businesses looking to improve structure, clarity,
-        and governance without unnecessary complexity.
-      </p>
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="profile-wrap">
+            <img class="profile-photo" src="allan-bott-profile.png" alt="Allan Bott, founder of Managed Assets" />
+          </div>
+
+          <div class="about-copy">
+            <span class="eyebrow">Meet the founder</span>
+            <h2>Meet Allan Bott</h2>
+            <p>Hi, I’m <strong>Allan Bott</strong>, founder of Managed Assets.</p>
+            <p>I’m an IT Asset, Licence, and Vendor Management specialist with over 10 years of experience in the IT industry and more than 8 years in contract management and commercial negotiation.</p>
+            <p>Throughout my career, I’ve helped organisations optimise software licensing, reduce audit risk, and negotiate better supplier agreements. At Avon Technologies, I delivered more than <strong>$300,000 in savings over a 24-month period</strong> through licence harvesting, contract renegotiation, and vendor rationalisation.</p>
+            <p>I am certified in Software Asset Management through IAITAM and have extensive experience in:</p>
+
+            <ul class="expertise-list">
+              <li>Software Asset Management</li>
+              <li>Hardware Asset Management</li>
+              <li>ELP Reviews</li>
+              <li>Software Audit Preparation</li>
+              <li>Contract Renewals</li>
+              <li>Supplier & Vendor Management</li>
+            </ul>
+
+            <p>Managed Assets was created to help businesses take control of their software estate, reduce compliance risk, and make smarter commercial decisions.</p>
+            <p>Whether you need support with audit readiness, contract negotiations, or improving your overall asset management maturity, I provide practical, real-world expertise that delivers measurable results.</p>
+
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/allan-bott-a5220b26/" target="_blank" rel="noopener">View LinkedIn Profile</a>
+          </div>
+        </div>
+
+        <div class="credentials" aria-label="Quick credentials">
+          <div class="credential">
+            <strong>10+</strong>
+            <span>Years in IT</span>
+          </div>
+          <div class="credential">
+            <strong>8+</strong>
+            <span>Years negotiation</span>
+          </div>
+          <div class="credential">
+            <strong>$300k+</strong>
+            <span>Savings delivered</span>
+          </div>
+          <div class="credential">
+            <strong>IAITAM</strong>
+            <span>Software Asset Manager</span>
+          </div>
+          <div class="credential">
+            <strong>SAM/HAM</strong>
+            <span>Asset specialist</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="toolkits">
+      <div class="container split">
+        <div class="feature-panel">
+          <span class="eyebrow">Digital Toolkits</span>
+          <h2>Templates and guides for better asset control.</h2>
+          <p>
+            Managed Assets toolkits are designed to help teams structure reviews, document licence positions, prepare for renewals and improve IT asset governance.
+          </p>
+          <ul>
+            <li>Software Licence Audit Toolkit</li>
+            <li>Effective Licence Position guidance</li>
+            <li>Renewal and negotiation planning</li>
+            <li>Supplier review and governance templates</li>
+          </ul>
+        </div>
+
+        <div class="feature-panel">
+          <span class="eyebrow">Why it matters</span>
+          <h2>Small gaps can become expensive problems.</h2>
+          <p>
+            Poor entitlement records, unclear ownership, unused licences and weak renewal controls can create unnecessary spend and audit exposure.
+          </p>
+          <p>
+            Managed Assets helps turn those gaps into structured actions, cleaner records and better commercial decisions.
+          </p>
+          <br />
+          <a class="btn btn-primary" href="https://www.etsy.com/shop/ManagedAssets" target="_blank" rel="noopener">Visit Etsy Shop</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Ready to get your licence estate under control?</h2>
+            <p>Start with a practical toolkit, connect on LinkedIn, or use Managed Assets as a foundation for your next audit, renewal or SAM improvement project.</p>
+          </div>
+          <a class="btn" href="https://www.linkedin.com/in/allan-bott-a5220b26/" target="_blank" rel="noopener">Get in touch</a>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    © 2026 Managed Assets. IT Asset Management Toolkits and Guides.
+    <div class="container footer-grid">
+      <p>© 2026 Managed Assets. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="https://www.etsy.com/shop/ManagedAssets" target="_blank" rel="noopener">Etsy</a>
+        <a href="https://www.linkedin.com/in/allan-bott-a5220b26/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
